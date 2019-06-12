@@ -1,10 +1,10 @@
-const os = require('os')
+const EventEmitter = require('events')
+const emitter = new EventEmitter()
 
-var totalMemory = os.totalmem()
-var freeMemory = os.freemem()
+// Register a listener
+emitter.on('messageLogged', function(){
+  console.log('Listener called')
+})
 
-console.log(`Total Memory: ${totalMemory}`)
-
-console.log(`Free Memory: ${freeMemory}`)
-
-console.log('Used Memory: ' + (totalMemory - freeMemory).toString())
+// Raise an event
+emitter.emit('messageLogged')
